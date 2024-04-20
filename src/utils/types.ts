@@ -5,13 +5,13 @@ import rootReducer from '../store/reducers';
 export type TLoginSchema = z.infer<typeof LoginSchema>;
 
 export const LoginSchema = z.object({
-  email: z.string().email().max(30, "Email can't exceed 30 characters"),
+  username: z.string().max(30, "Username can't exceed 30 characters"),
   password: z.string().max(20, 'Password must be atleast 10 characters'),
 });
 
 export const enum Credentials {
-  AdminUsername = 'admin@gmail.com',
-  PasswordUsername = 'admin123',
+  AdminUsername = 'tesonet',
+  PasswordUsername = 'partyanimal',
 }
 
 export type AppState = ReturnType<typeof rootReducer>;
@@ -24,6 +24,11 @@ export enum ROUTES {
 }
 
 export const enum StorageKeys {
-  email = 'email',
+  username = 'username',
   password = 'password',
+}
+
+export enum ENDPOINTS {
+  TOKENS = '/tokens',
+  SERVERS = '/servers',
 }

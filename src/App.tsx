@@ -2,18 +2,19 @@ import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Login } from './components/Login/Login';
 import { Main } from './components/Main/Main';
+import { NavigationBar } from './components/Navigation/Navigation';
 import { ServerList } from './components/SeverList/ServerList';
-import useAuthenticated from './hooks/useAuthenticated';
+import { useUserAuthentication } from './hooks/useUserAuthentication';
 import { ProtectedRoute } from './routes/PrivateRoute';
 import { ROUTES } from './utils/types';
 
 const App = () => {
-  const { isAuthenticated } = useAuthenticated();
+  const { isAuthenticated } = useUserAuthentication();
   console.log(isAuthenticated, 'is auth');
   return (
     <div>
       <BrowserRouter>
-        {/* <NavBar /> */}
+        <NavigationBar />{' '}
         <Routes>
           <Route path={ROUTES.HOME} Component={Main} />
           <Route

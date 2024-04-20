@@ -7,7 +7,7 @@ import { getFromLocalStorage } from '../utils/storage';
 import { useAppSelector } from '../utils/types';
 
 
-const useUserAuthentication = () => {
+export const useUserAuthentication = () => {
   const token = getFromLocalStorage(TOKEN);
   const {isAuthenticated} = useAppSelector(userSelector);
   const dispatch = useDispatch();
@@ -28,4 +28,3 @@ const useUserAuthentication = () => {
   };
 };
 
-export default useUserAuthentication;

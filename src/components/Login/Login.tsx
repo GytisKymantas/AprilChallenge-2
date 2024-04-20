@@ -14,6 +14,9 @@ import {
 import { TOKEN } from '../../utils/constants';
 import { Navigate } from 'react-router-dom';
 import { getFromLocalStorage, setToLocalStorage } from '../../utils/storage';
+import { useRedirect } from '../../hooks/useRedirect';
+import { createTesonetClient } from '../../config/tesonetClient';
+import { useUserAuthentication } from '../../hooks/useUserAuthentication';
 // import { useRouter } from 'next/navigation';
 // import Link from 'next/link';
 
@@ -26,29 +29,31 @@ export const Login = () => {
   } = useForm<TLoginSchema>({
     resolver: zodResolver(LoginSchema),
   });
-  // const router = useRouter();
+  const { toHome } = useRedirect();
+  const { getToken } = createTesonetClient();
+  const { updateUserAuthentication } = useUserAuthentication();
 
   useEffect(() => {
     const checkLoginStatus = () => {
       const isAuthenticated = getFromLocalStorage(TOKEN);
       if (isAuthenticated) {
         console.log('sweet ! navigate me somewhere');
-        <Navigate to={ROUTES.HOME} replace={true} />;
+        toHome();
       }
     };
     checkLoginStatus();
   }, []);
 
   const onSubmit = async (data: TLoginSchema) => {
-    if (
-      getValues(StorageKeys.email) === Credentials.AdminUsername &&
-      getValues(StorageKeys.password) === Credentials.PasswordUsername
-    ) {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+    const { username, password } = data;
+    const token = await getToken(username, password);
+
+    console.log(data, 'this is data');
+    console.log(token, 'token');
+    if (token) {
       setToLocalStorage('key', TOKEN);
-      <Navigate to={ROUTES.HOME} replace={true} />;
-    } else {
-      toast.error("Incorrect email or password'");
+      updateUserAuthentication(true);
+      toHome();
     }
   };
 
@@ -59,11 +64,11 @@ export const Login = () => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <InputContainer>
             <StyledInput
-              {...register(StorageKeys.email)}
+              {...register(StorageKeys.username)}
               maxLength={50}
-              placeholder={StorageKeys.email}
+              placeholder={StorageKeys.username}
               hasError={
-                !!errors[StorageKeys.password] || !!errors[StorageKeys.email]
+                !!errors[StorageKeys.password] || !!errors[StorageKeys.username]
               }
             />
             <StyledInput
@@ -72,7 +77,7 @@ export const Login = () => {
               placeholder={StorageKeys.password}
               type='password'
               hasError={
-                !!errors[StorageKeys.password] || !!errors[StorageKeys.email]
+                !!errors[StorageKeys.password] || !!errors[StorageKeys.username]
               }
             />
           </InputContainer>
