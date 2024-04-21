@@ -32,3 +32,8 @@ export enum ENDPOINTS {
   TOKENS = '/tokens',
   SERVERS = '/servers',
 }
+
+export type Server = {
+  name: string;
+  distance: string;
+}

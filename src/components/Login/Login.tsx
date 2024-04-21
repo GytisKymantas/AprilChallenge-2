@@ -51,7 +51,7 @@ export const Login = () => {
     console.log(data, 'this is data');
     console.log(token, 'token');
     if (token) {
-      setToLocalStorage('key', TOKEN);
+      setToLocalStorage('key', token);
       updateUserAuthentication(true);
       toHome();
     }
