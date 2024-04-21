@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { TOKENS_ENDPOINT, SERVERS_ENDPOINT } from '../utils/constants';
+import { Endpoints } from '../utils/constants';
 
 export const createTesonetClient = () => {
   const instance = axios.create({
@@ -8,7 +8,7 @@ export const createTesonetClient = () => {
 
   const getToken = async (username:string, password:string) => {
     const response = await instance.post(
-      TOKENS_ENDPOINT,
+      Endpoints.TOKENS,
       {
         username,
         password,
@@ -24,7 +24,7 @@ export const createTesonetClient = () => {
   };
 
   const getServers = async (token:string) => {
-    const response = await instance.get(SERVERS_ENDPOINT, {
+    const response = await instance.get(Endpoints.SERVERS, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

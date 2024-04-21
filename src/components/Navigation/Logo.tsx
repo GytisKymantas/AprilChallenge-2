@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useRedirect } from '../../hooks/useRedirect';
 
-const Logo = () => {
+export const Logo = () => {
   const { toHome } = useRedirect();
 
   return (
@@ -14,8 +14,6 @@ const Logo = () => {
     </Button>
   );
 };
-
-export default Logo;
 
 const Button = styled.div`
   cursor: pointer;

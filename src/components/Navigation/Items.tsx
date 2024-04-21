@@ -4,6 +4,7 @@ import { TOKEN } from '../../utils/constants';
 import { useUserAuthentication } from '../../hooks/useUserAuthentication';
 import { useRedirect } from '../../hooks/useRedirect';
 import { removeFromLocalStorage } from '../../utils/storage';
+import React from 'react';
 
 interface ItemsProps {
   isMobileExpanded: boolean;
@@ -12,7 +13,6 @@ interface ItemsProps {
 export const Items = ({ isMobileExpanded }: ItemsProps) => {
   const { toHome, toLogin, toServers } = useRedirect();
   const { isAuthenticated, updateUserAuthentication } = useUserAuthentication();
-  console.log(isMobileExpanded, 'isMobileExpandeds');
   return (
     <Container isMobileExpanded={isMobileExpanded}>
       <Item onClick={toHome} label='Main' />

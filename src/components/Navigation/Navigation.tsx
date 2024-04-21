@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Expander } from './Expander';
 import { Items } from './Items';
-import Logo from './Logo';
+import { Logo } from './Logo';
 
 export const NavigationBar = () => {
   const [isMobileExpanded, setMobileExpanded] = useState(false);

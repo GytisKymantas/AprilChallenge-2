@@ -1,8 +1,19 @@
-import { ASCENDING } from '../../../utils/constants';
 import styled from 'styled-components';
 import { FaSort, FaSortDown, FaSortUp } from 'react-icons/fa';
+import React from 'react';
+import { SortDirection } from '../../../utils/constants';
 
-export const SortHeadRow = ({ name, handleSortAction, sortDirection }: any) => {
+interface SortHeadRowProps {
+  name: string;
+  sortDirection: string | null;
+  handleSortAction: () => void;
+}
+
+export const SortHeadRow = ({
+  name,
+  handleSortAction,
+  sortDirection,
+}: SortHeadRowProps) => {
   const commonIconProps = {
     className: 'ml-3 inline cursor-pointer',
     onClick: handleSortAction,
@@ -13,13 +24,17 @@ export const SortHeadRow = ({ name, handleSortAction, sortDirection }: any) => {
   const DescendingIcon = <FaSortDown {...commonIconProps} />;
 
   const resolveCurrentIcon = (() => {
-    if (sortDirection === null) {
+    if (!sortDirection) {
       return NeutralIcon;
     }
-    if (sortDirection === ASCENDING) {
+    if (sortDirection === SortDirection.ASCENDING) {
       return AscendingIcon;
     }
-    return DescendingIcon;
+
+    if (sortDirection === SortDirection.DESCENDING) {
+      return DescendingIcon;
+    }
+    return;
   })();
 
   return (

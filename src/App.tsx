@@ -6,17 +6,16 @@ import { NavigationBar } from './components/Navigation/Navigation';
 import { ServerListPage } from './components/ServerList/ServerListPage';
 import { useUserAuthentication } from './hooks/useUserAuthentication';
 import { ProtectedRoute } from './routes/PrivateRoute';
-import { ROUTES } from './utils/types';
+import { ROUTES } from './utils/constants';
 
 const App = () => {
   const { isAuthenticated } = useUserAuthentication();
-  console.log(isAuthenticated, 'is auth');
   return (
     <div>
       <BrowserRouter>
         <NavigationBar />{' '}
         <Routes>
-          <Route path={ROUTES.HOME} Component={Main} />
+          <Route path={ROUTES.HOME} element={<Main />} />
           <Route
             path={ROUTES.LOGIN}
             element={

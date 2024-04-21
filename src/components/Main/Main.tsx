@@ -1,9 +1,15 @@
 import React from 'react';
 import { useUserAuthentication } from '../../hooks/useUserAuthentication';
-import { LOGGED_IN_MESSAGE, LOGGED_OUT_MESSAGE } from '../../utils/constants';
+import { Messages } from '../../utils/constants';
 
 export const Main = () => {
   const { isAuthenticated } = useUserAuthentication();
 
-  return <div> {isAuthenticated ? LOGGED_IN_MESSAGE : LOGGED_OUT_MESSAGE}</div>;
+  return (
+    <>
+      {isAuthenticated
+        ? Messages.LOGGED_IN_MESSAGE
+        : Messages.LOGGED_OUT_MESSAGE}
+    </>
+  );
 };

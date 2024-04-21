@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 import { Server } from '../../../utils/types';
 
@@ -27,7 +28,7 @@ const TableRow = styled.tr`
     background-color: #f3f4f6;
   }
   &.hover\:bg-gray-300:hover {
-    background-color: #d1d5db;
+    background-color: #sd1d5db;
   }
 `;
 

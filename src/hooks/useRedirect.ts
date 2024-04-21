@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { ROUTES } from "../utils/types";
+import { ROUTES } from "../utils/constants";
 
 
 export const useRedirect = () => {

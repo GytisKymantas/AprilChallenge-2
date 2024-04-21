@@ -2,22 +2,21 @@
 import { useState,useEffect } from 'react';
 
 import { getFromLocalStorage } from '../utils/storage';
-import { TOKEN } from '../utils/constants';
 import { createTesonetClient } from '../config/tesonetClient';
+import { Server } from '../utils/types';
+import { TOKEN } from '../utils/constants';
 
 export const useFetchServers = () => {
-  const [servers, setServers] = useState([]);
+  const [servers, setServers] = useState<Server[]>([]);
   const [serversLoaded, setServersLoaded] = useState(false);
-  const token = getFromLocalStorage('key');
+  const token = getFromLocalStorage(TOKEN);
   const { getServers } = createTesonetClient();
-  console.log(token,' is it true yo?')
 
   useEffect(() => {
     console.log('fetched')
     const fetchServers = async () => {
       try {
         if (token) {
-          console.log(token,'is token')
           const serversData = await getServers(token);
           setServers(serversData);
           setServersLoaded(true);
@@ -29,15 +28,18 @@ export const useFetchServers = () => {
     };
 
     fetchServers();
-
-    // Cleanup function if needed
-    // return () => { /* cleanup code */ };
   }, []);
+
+  const handleSetServer = (servers:Server[]) => {
+    console.log(servers,'fired handler')
+    setServers(servers)
+  }
 
   return {
     servers,
     serversLoaded,
     setServers,
+    handleSetServer,
   };
 };
 
