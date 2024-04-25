@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 import { SortConfigKeys } from '../../../utils/constants';
 import { Server } from '../../../utils/types';

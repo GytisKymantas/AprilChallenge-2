@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect,useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { userSelector } from '../store/user/selectors';
 import { setIsAuthenticated } from '../store/user/slice';
@@ -12,15 +12,18 @@ export const useUserAuthentication = () => {
   const {isAuthenticated} = useAppSelector(userSelector);
   const dispatch = useDispatch();
 
-  const updateUserAuthentication = (authenticated: boolean) => {
-    dispatch(setIsAuthenticated(authenticated));
-  };
+  const updateUserAuthentication = useCallback(
+    (authenticated: boolean) => {
+      dispatch(setIsAuthenticated(authenticated));
+    },
+    [dispatch]
+  );
 
   useEffect(() => {
     if (token) {
       updateUserAuthentication(true);
     }
-  }, []);
+  }, [token,updateUserAuthentication]);
 
   return {
     isAuthenticated,

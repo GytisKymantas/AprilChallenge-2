@@ -1,19 +1,6 @@
 export const isWindowExists = typeof window !== 'undefined';
 export const TOKEN = 'token';
 
-// export const TOKENS_ENDPOINT = '/tokens';
-// export const SERVERS_ENDPOINT = '/servers';
-
-// export const LOGGED_IN_MESSAGE = 'Hey, you are logged in, go see some servers';
-// export const NO_SERVERS_MESSAGE = 'There are not servers';
-// export const LOGGED_OUT_MESSAGE = 'Login to see servers';
-
-// export const ASCENDING = 'ascending';
-// export const DESCENDING = 'descending';
-
-// export const NAME = 'name';
-// export const DISTANCE = 'distance';
-
 export enum ROUTES {
   HOME = '/',
   LOGIN = '/login',
@@ -32,8 +19,8 @@ export enum Endpoints {
 
 export enum Messages {
   LOGGED_IN_MESSAGE = 'Hey, you are logged in, go see some servers',
-  NO_SERVERS_MESSAGE = 'There are not servers',
-  LOGGED_OUT_MESSAGE = 'Login to see servers',
+  NO_SERVERS_MESSAGE = 'There are no servers found',
+  LOGGED_OUT_MESSAGE = 'Please click on log in button',
 }
 
 export enum SortDirection {
@@ -55,4 +42,12 @@ export const initialSortConfig = {
   name: null,
   distance: null,
 };
+
 export type SortConfigKeys = keyof typeof initialSortConfig;
+
+export const COLORS = {
+  white: '#ffffff',
+  black: '#000000',
+  primary: '#8b1983',
+  secondary: '#1ca67a',
+} as const;

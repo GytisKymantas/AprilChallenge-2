@@ -1,5 +1,5 @@
-import React from 'react';
 import styled from 'styled-components';
+import { COLORS } from '../../../utils/constants';
 import { Server } from '../../../utils/types';
 
 interface TableBodyProps {
@@ -19,16 +19,10 @@ export const TableBody = ({ servers }: TableBodyProps) => (
 
 const TableRow = styled.tr`
   &.text-black {
-    color: black;
+    color: ${COLORS.white};
   }
   &.text-center {
     text-align: center;
-  }
-  &.bg-gray-100 {
-    background-color: #f3f4f6;
-  }
-  &.hover\:bg-gray-300:hover {
-    background-color: #sd1d5db;
   }
 `;
 

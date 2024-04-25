@@ -4,17 +4,12 @@ import { TOKEN } from '../../utils/constants';
 import { useUserAuthentication } from '../../hooks/useUserAuthentication';
 import { useRedirect } from '../../hooks/useRedirect';
 import { removeFromLocalStorage } from '../../utils/storage';
-import React from 'react';
 
-interface ItemsProps {
-  isMobileExpanded: boolean;
-}
-
-export const Items = ({ isMobileExpanded }: ItemsProps) => {
+export const Items = () => {
   const { toHome, toLogin, toServers } = useRedirect();
   const { isAuthenticated, updateUserAuthentication } = useUserAuthentication();
   return (
-    <Container isMobileExpanded={isMobileExpanded}>
+    <Container>
       <Item onClick={toHome} label='Main' />
       {isAuthenticated ? (
         <>
@@ -34,9 +29,9 @@ export const Items = ({ isMobileExpanded }: ItemsProps) => {
   );
 };
 
-const Container = styled.div<{ isMobileExpanded?: boolean }>`
+const Container = styled.div`
   width: 100%;
-  display: ${({ isMobileExpanded }) => (isMobileExpanded ? 'flex' : 'none')};
+  display: flex;
   justify-content: center;
   gap: 10px;
   margin: 0 auto;

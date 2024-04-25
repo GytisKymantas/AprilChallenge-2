@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { FaSort, FaSortDown, FaSortUp } from 'react-icons/fa';
-import React from 'react';
 import { SortDirection } from '../../../utils/constants';
 
 interface SortHeadRowProps {

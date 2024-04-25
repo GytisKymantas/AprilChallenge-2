@@ -1,28 +1,30 @@
-import { render } from '@testing-library/react';
-import React from 'react';
-import Logo from '../Logo';
+/**
+ * @jest-environment jsdom
+ */
 
-export {};
+import { fireEvent, render, renderHook } from '@testing-library/react';
+import { useRedirect } from '../../../hooks/useRedirect';
+import { Logo } from '../Logo';
+
+jest.mock('../../../hooks/useRedirect', () => ({
+  useRedirect: () => ({
+    toHome: jest.fn(() => '/home'),
+  }),
+}));
 
 describe('isEven function', () => {
-  function isEven(num) {
-    return num % 2 === 0;
-  }
-
-  it('returns true for even numbers', () => {
+  it('renders without crashing', () => {
     const { getByText } = render(<Logo />);
-
-    console.log(getByText, 'bley');
-  });
-  it('returns true for even numbers', () => {
-    expect(isEven(2)).toBe(true);
-    expect(isEven(4)).toBe(true);
-    expect(isEven(6)).toBe(true);
+    expect(getByText('Nord')).toBeInTheDocument();
   });
 
-  it('returns false for odd numbers', () => {
-    expect(isEven(1)).toBe(false);
-    expect(isEven(3)).toBe(false);
-    expect(isEven(5)).toBe(false);
+  it('calls toHome function on button click', () => {
+    const {
+      result: { current },
+    } = renderHook(useRedirect);
+
+    const { getByText } = render(<Logo />);
+    fireEvent.click(getByText('Nord'));
+    expect(current.toHome()).toEqual('/home');
   });
 });

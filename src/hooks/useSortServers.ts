@@ -15,7 +15,7 @@ export const useSortServers = (servers:Server[], setServers:(servers: Server[]) 
     const newSortConfig = {
       ...initialSortConfig,
       [fieldName]: newSortDirection,
-    } as any;
+    };
     const sortedServers = sortServers(newSortConfig, fieldName, servers);
 
     setServers(sortedServers);

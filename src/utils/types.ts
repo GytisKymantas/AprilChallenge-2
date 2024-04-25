@@ -19,5 +19,6 @@ export type Server = {
 };
 
 export type SortConfig = {
-  [fieldName: string]: SortDirection;
-}
+  name: SortDirection | null;
+  distance: SortDirection | null;
+};

@@ -13,7 +13,6 @@ export const useFetchServers = () => {
   const { getServers } = createTesonetClient();
 
   useEffect(() => {
-    console.log('fetched')
     const fetchServers = async () => {
       try {
         if (token) {
@@ -28,17 +27,15 @@ export const useFetchServers = () => {
     };
 
     fetchServers();
-  }, []);
+  }, [token,getServers]);
 
   const handleSetServer = (servers:Server[]) => {
-    console.log(servers,'fired handler')
     setServers(servers)
   }
 
   return {
     servers,
     serversLoaded,
-    setServers,
     handleSetServer,
   };
 };

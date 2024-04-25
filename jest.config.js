@@ -1,9 +1,7 @@
+/** @type {import('ts-jest').JestConfigWithTsJest} */
 module.exports = {
-  resetMocks: true,
-  moduleNameMapper: {
-    '@Common(.*)$': '<rootDir>/src/common$1',
-    '@Config(.*)$': '<rootDir>/src/config$1',
-  },
-  setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
+  preset: 'ts-jest',
+  setupFilesAfterEnv: ['@testing-library/jest-dom/extend-expect'],
   testEnvironment: 'jsdom',
+  transformIgnorePatterns: ['\\.(css|scss|sass)$'],
 };

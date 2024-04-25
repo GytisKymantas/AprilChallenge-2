@@ -1,4 +1,3 @@
-import React from 'react';
 import { useFetchServers } from '../../hooks/useFetchServers';
 import { useSortServers } from '../../hooks/useSortServers';
 import { Loader } from '../Loader/Loader';
@@ -11,13 +10,8 @@ export const ServerListPage = () => {
     handleSetServer
   );
 
-  if (servers && servers.length === 0) {
-    return <p>NO_SERVERS_MESSAGE</p>;
-  }
-
   return (
     <>
-      hello?
       {serversLoaded ? (
         <ServersList
           servers={servers}

@@ -1,9 +1,7 @@
-import React from 'react';
-
 import styled from 'styled-components';
 import { SortHeadRow } from './SortHeadRow';
 import { ServersListProps } from '../sections/ServersList';
-import { ServerProps } from '../../../utils/constants';
+import { COLORS, ServerProps } from '../../../utils/constants';
 
 export type TableHeadProps = Omit<ServersListProps, 'servers'>;
 
@@ -27,7 +25,7 @@ export const TableHead = ({ handleSortAction, sortConfig }: TableHeadProps) => {
 };
 
 const StyledTableRow = styled.tr`
-  color: #ccc;
-  background-color: #4c1d95;
+  color: ${COLORS.white};
+  background-color: ${COLORS.primary};
   font-weight: bold;
 `;

@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 import { zodResolver } from '@hookform/resolvers/zod';
 import toast from 'react-hot-toast';
 import { TLoginSchema, LoginSchema } from '../../utils/types';
-import { StorageKeys, TOKEN } from '../../utils/constants';
+import { COLORS, StorageKeys, TOKEN } from '../../utils/constants';
 import { getFromLocalStorage, setToLocalStorage } from '../../utils/storage';
 import { useRedirect } from '../../hooks/useRedirect';
 import { createTesonetClient } from '../../config/tesonetClient';
@@ -21,16 +21,13 @@ export const Login = () => {
   const { toHome } = useRedirect();
   const { getToken } = createTesonetClient();
   const { updateUserAuthentication } = useUserAuthentication();
+  const isAuthenticated = getFromLocalStorage(TOKEN);
 
   useEffect(() => {
-    const checkLoginStatus = () => {
-      const isAuthenticated = getFromLocalStorage(TOKEN);
-      if (isAuthenticated) {
-        toHome();
-      }
-    };
-    checkLoginStatus();
-  }, []);
+    if (isAuthenticated) {
+      toHome();
+    }
+  }, [isAuthenticated, toHome]);
 
   const onSubmit = async (data: TLoginSchema) => {
     const { username, password } = data;
@@ -40,6 +37,8 @@ export const Login = () => {
       setToLocalStorage(TOKEN, tokenID);
       updateUserAuthentication(true);
       toHome();
+    } else {
+      toast.error("Incorrect email or password'");
     }
   };
 
@@ -89,10 +88,10 @@ const Container = styled.div`
 const Button = styled.button`
   display: flex;
   border: none;
-  background: purple;
+  background: ${COLORS.primary};
   font-weight: 700;
   text-transform: uppercase;
-  color: white;
+  color: ${COLORS.white};
   padding: 10px 15px;
   width: 100%;
   justify-content: center;
@@ -115,7 +114,7 @@ export const StyledInput = styled.input<{ hasError?: boolean }>`
     border-color: ${({ hasError }) => (hasError ? 'red' : 'blue')};
   }
 
-  ::placeholder: {
+  ::placeholder {
     text-transform: capitalize;
   }
 `;
