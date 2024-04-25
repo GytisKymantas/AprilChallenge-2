@@ -7,14 +7,13 @@ describe('useFetchServers', () => {
     const { result } = renderHook(() => useFetchServers());
     const testServer = [{ name: 'Server A', distance: '1' }];
 
-    const { servers, serversLoaded, handleSetServer } = result.current;
-
     expect(result.current.servers).toEqual([]);
-    expect(serversLoaded).toBe(false);
+    expect(result.current.serversLoaded).toBe(false);
 
     act(() => {
-      handleSetServer(testServer);
+      result.current.handleSetServer(testServer);
     });
-    expect(servers).toEqual(testServer);
+
+    expect(result.current.servers).toEqual(testServer);
   });
 });

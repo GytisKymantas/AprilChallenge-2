@@ -80,7 +80,7 @@ const Container = styled.div`
   align-items: center;
 
   ::placeholder {
-    color: purple;
+    color: ${COLORS.primary};
     text-transform: capitalize;
   }
 `;

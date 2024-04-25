@@ -23,7 +23,7 @@ export const useUserAuthentication = () => {
     if (token) {
       updateUserAuthentication(true);
     }
-  }, [token,updateUserAuthentication]);
+  }, [token, updateUserAuthentication]);
 
   return {
     isAuthenticated,

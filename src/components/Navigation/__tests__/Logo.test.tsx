@@ -13,12 +13,12 @@ jest.mock('../../../hooks/useRedirect', () => ({
 }));
 
 describe('isEven function', () => {
-  it('renders without crashing', () => {
+  it('renders without crashing Logo with text Nord', () => {
     const { getByText } = render(<Logo />);
     expect(getByText('Nord')).toBeInTheDocument();
   });
 
-  it('calls toHome function on button click', () => {
+  it('calls toHome function on button named Nord onclick', () => {
     const {
       result: { current },
     } = renderHook(useRedirect);
